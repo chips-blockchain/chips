@@ -6,7 +6,7 @@ We restored our logo. Please pay attention to the following points when using ou
 
 # Old Logo vs New Logo
 
-<img src="./chips-logo-old-v1.png" width="40%" />&ensp;&ensp;&ensp;<img src="./chips-logo-emblem.png" width="40%" />
+<img src="./chips-logo-old-v1.png" width="20%" />&ensp;&ensp;&ensp;<img src="./chips-logo-emblem.png" width="20%" />
 
 [Old Logo v1 SVG](https://github.com/chips-blockchain/chips/tree/master/media/logo/chips-logo-old-v1.svg)<br />
 [Old Logo v2 SVG](https://github.com/chips-blockchain/chips/tree/master/media/logo/chips-logo-old-v2.svg)
