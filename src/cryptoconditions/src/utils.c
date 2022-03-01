@@ -3,13 +3,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
 
 #include "include/cJSON.h"
 #include "include/sha256.h"
 #include "asn/asn_application.h"
 #include "cryptoconditions.h"
-#include "internal.h"
 
+#define BUF_SIZE 1024 * 1024
 
 static unsigned char encoding_table[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
                                 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
