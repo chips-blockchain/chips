@@ -51,7 +51,15 @@ CAmount GetDustThreshold(const CTxOut& txout, const CFeeRate& dustRelayFeeIn)
 
 bool IsDust(const CTxOut& txout, const CFeeRate& dustRelayFeeIn)
 {
-    return (txout.nValue < GetDustThreshold(txout, dustRelayFeeIn));
+    /* To avoid the dependancy on the ln, we are logging every move of the game on
+     * the chips blockchain. For this we are creating the transactions with zero
+     * payout and the data part of them contains information related to the game.
+     * In order to log these game moves, since the payout is zero, we need to make
+     * dust transactions, so in order to allow the dust transactions we are commenting
+     * check for the dust threshold.
+     */		
+    //return (txout.nValue < GetDustThreshold(txout, dustRelayFeeIn));
+    return false;
 }
 
 bool IsStandard(const CScript& scriptPubKey, txnouttype& whichType, const bool witnessEnabled)
