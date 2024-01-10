@@ -96,7 +96,7 @@ UniValue importprivkey(const JSONRPCRequest& request)
         return NullUniValue;
     }
 
-    if (request.fHelp || request.params.size() < 1 || request.params.size() > 3)
+    if (request.fHelp || request.params.size() < 1 || request.params.size() > 4)
         throw std::runtime_error(
             "importprivkey \"privkey\" ( \"label\" ) ( rescan )\n"
             "\nAdds a private key (as returned by dumpprivkey) to your wallet. Requires a new wallet backup.\n"
@@ -104,6 +104,7 @@ UniValue importprivkey(const JSONRPCRequest& request)
             "1. \"privkey\"          (string, required) The private key (see dumpprivkey)\n"
             "2. \"label\"            (string, optional, default=\"\") An optional label\n"
             "3. rescan               (boolean, optional, default=true) Rescan the wallet for transactions\n"
+            "4. height               (numeric, optional, default=0) Specified height to start rescan\n"
             "\nNote: This call can take minutes to complete if rescan is true, during that time, other rpc calls\n"
             "may report that the imported key exists but related transactions are still missing, leading to temporarily incorrect/bogus balances and unspent outputs until rescan completes.\n"
             "\nExamples:\n"
@@ -116,7 +117,9 @@ UniValue importprivkey(const JSONRPCRequest& request)
             "\nImport using default blank label and without rescan\n"
             + HelpExampleCli("importprivkey", "\"mykey\" \"\" false") +
             "\nAs a JSON-RPC call\n"
-            + HelpExampleRpc("importprivkey", "\"mykey\", \"testing\", false")
+            + HelpExampleRpc("importprivkey", "\"mykey\", \"testing\", false") +
+            "\nImport the private key with rescan from specified height\n"
+            + HelpExampleCli("importprivkey", "\"mykey\" \"\" true 150000")
         );
 
 
@@ -172,7 +175,12 @@ UniValue importprivkey(const JSONRPCRequest& request)
         }
     }
     if (fRescan) {
-        pwallet->RescanFromTime(TIMESTAMP_MIN, reserver, true /* update */);
+        if (request.params.size() > 3) {
+            int32_t height = request.params[3].get_int();
+            pwallet->ScanForWalletTransactions(chainActive[height], nullptr, reserver, true);
+        } else {
+            pwallet->RescanFromTime(TIMESTAMP_MIN, reserver, true /* update */);
+        }
     }
 
     return NullUniValue;
