@@ -81,7 +81,7 @@
 // third season ending height is unknown so it set to very very far in future. 
 // Fourth season is ending at the timestamp 1623682800, and the approximate CHIPS block height of that time is of 8207456.
 // fifth season, targeting timestamp 1656077853; averaging 8640 blocks/day
-static const int32_t KMD_SEASON_HEIGHTS[NUM_KMD_SEASONS] = {0, 4173578, 6415000, 8207456, 10275665, 11446305, 999999999};
+static const int32_t KMD_SEASON_HEIGHTS[NUM_KMD_SEASONS] = {0, 4173578, 6415000, 8207456, 10275665, 11446305, 13193400, 999999999};
 
 // Era array of pubkeys. Add extra seasons to bottom as requried, after adding appropriate info above. 
 static const char *notaries_elected[NUM_KMD_SEASONS][NUM_KMD_NOTARIES][2] =
